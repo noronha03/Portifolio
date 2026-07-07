@@ -1,0 +1,642 @@
+/* ============================================================
+   PORTFÓLIO · RENAN NORONHA RODRIGUES
+   ------------------------------------------------------------
+   Abordagem: Mobile First. Os estilos base valem para telas
+   pequenas; os blocos @media (min-width: ...) adaptam para
+   tablet e desktop.
+
+   Para mudar a identidade visual inteira, ajuste só as
+   variáveis em :root abaixo (cores, fontes, espaçamentos).
+   ============================================================ */
+
+/* ---------- 1. VARIÁVEIS DE TEMA ---------- */
+:root {
+  /* Cores base (tema escuro "tech") */
+  --bg: #0b1120;            /* fundo principal */
+  --bg-alt: #0f172a;        /* fundo de seções alternadas */
+  --surface: #16213b;       /* cartões e superfícies elevadas */
+  --border: #24304d;        /* bordas sutis */
+
+  --text: #dbe4f3;          /* texto principal */
+  --text-dim: #8fa0bd;      /* texto secundário */
+  --heading: #f2f6fd;       /* títulos */
+
+  --accent: #34d399;        /* verde "terminal": links, CTAs, destaques */
+  --accent-soft: rgba(52, 211, 153, 0.12); /* verde translúcido p/ fundos */
+
+  /* Tipografia */
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Medidas */
+  --container: 1100px;
+  --radius: 12px;
+  --section-y: 4.5rem;      /* respiro vertical das seções (mobile) */
+}
+
+/* ---------- 2. RESET E BASE ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+strong { color: var(--heading); }
+
+/* Classe utilitária: aplica a fonte monoespaçada */
+.mono { font-family: var(--font-mono); }
+
+/* Container central compartilhado por todas as seções */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+/* ---------- 3. ANIMAÇÃO DE ENTRADA (.reveal) ----------
+   Os elementos começam invisíveis e sobem quando entram na
+   tela. O JS adiciona .reveal--visible via IntersectionObserver. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal--visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Respeita quem prefere menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+}
+
+/* ---------- 4. NAVEGAÇÃO ---------- */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 0.9rem 0;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+/* Classe adicionada pelo JS quando a página rola */
+.nav--scrolled {
+  background: rgba(11, 17, 32, 0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav__logo {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--heading);
+}
+.nav__logo:hover { text-decoration: none; }
+.nav__logo-mark { color: var(--accent); }
+
+/* Botão hambúrguer (visível só no mobile) */
+.nav__toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  padding: 6px;
+}
+.nav__toggle span {
+  width: 24px; height: 2px;
+  background: var(--heading);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+/* Vira um "X" quando o menu está aberto */
+.nav__toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav__toggle.is-open span:nth-child(2) { opacity: 0; }
+.nav__toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Menu mobile: dropdown em tela cheia abaixo da barra */
+.nav__links {
+  position: absolute;
+  top: 100%; left: 0; right: 0;
+  display: none;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.25rem 1.5rem;
+}
+.nav__links.is-open { display: flex; }
+
+.nav__links a {
+  color: var(--text);
+  font-weight: 500;
+  padding: 0.6rem 0;
+}
+.nav__links a:hover { color: var(--accent); text-decoration: none; }
+
+.nav__cta {
+  color: var(--accent) !important;
+  font-family: var(--font-mono);
+}
+
+/* ---------- 5. HERO ---------- */
+.hero {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding: 6.5rem 0 3rem;
+  /* Grade sutil ao fundo, feita só com CSS */
+  background-image:
+    linear-gradient(rgba(36, 48, 77, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(36, 48, 77, 0.35) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+.hero__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.hero__kicker {
+  color: var(--accent);
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.hero__title {
+  font-size: clamp(2.4rem, 8vw, 4rem);
+  font-weight: 800;
+  line-height: 1.08;
+  color: var(--heading);
+  letter-spacing: -0.02em;
+}
+
+.hero__tagline {
+  margin-top: 1.25rem;
+  max-width: 34rem;
+  font-size: 1.06rem;
+  color: var(--text-dim);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+/* Botões reutilizáveis */
+.btn {
+  display: inline-block;
+  padding: 0.8rem 1.6rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+.btn:hover { text-decoration: none; transform: translateY(-2px); }
+
+.btn--primary {
+  background: var(--accent);
+  color: #06241a;
+}
+.btn--primary:hover { background: #4ce0ab; }
+
+.btn--ghost {
+  border: 1px solid var(--accent);
+  color: var(--accent);
+}
+.btn--ghost:hover { background: var(--accent-soft); }
+
+.btn--full { width: 100%; border: 0; cursor: pointer; font-family: var(--font-sans); }
+
+/* Cartão-terminal do hero */
+.hero__terminal {
+  background: #0a0f1d;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.45);
+  max-width: 480px;
+}
+
+.terminal__bar {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0.65rem 0.9rem;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.dot--r { background: #f87171; }
+.dot--y { background: #fbbf24; }
+.dot--g { background: #34d399; }
+.terminal__title {
+  margin-left: auto;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+}
+
+.terminal__body {
+  padding: 1.2rem 1.1rem;
+  font-size: 0.82rem;
+  line-height: 1.75;
+  color: #a7f3d0;
+  overflow-x: auto;
+}
+.terminal__body code { font-family: inherit; }
+
+/* Cursor piscando no fim do terminal */
+.cursor { animation: blink 1.1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- 6. SEÇÕES GENÉRICAS ---------- */
+.section { padding: var(--section-y) 0; }
+.section--alt { background: var(--bg-alt); }
+
+.section__title {
+  font-size: clamp(1.5rem, 4.5vw, 2rem);
+  font-weight: 800;
+  color: var(--heading);
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+/* Numeração estilo código antes de cada título */
+.section__num {
+  color: var(--accent);
+  font-size: 0.8em;
+  font-weight: 400;
+}
+
+/* ---------- 7. SOBRE MIM ---------- */
+.sobre__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.sobre__text p + p { margin-top: 1.1rem; }
+.sobre__text { color: var(--text-dim); }
+
+.sobre__facts {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.fact {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.2rem;
+}
+.fact__num {
+  display: block;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+.fact__label {
+  font-size: 0.86rem;
+  color: var(--text-dim);
+}
+
+/* ---------- 8. TIMELINE DE EXPERIÊNCIA ---------- */
+.timeline {
+  position: relative;
+  padding-left: 1.4rem;
+}
+/* Linha vertical da timeline */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 5px; top: 6px; bottom: 6px;
+  width: 2px;
+  background: var(--border);
+}
+
+.tl__item {
+  position: relative;
+  padding-bottom: 2.2rem;
+}
+.tl__item:last-child { padding-bottom: 0; }
+
+/* Bolinha na linha */
+.tl__marker {
+  position: absolute;
+  left: -1.4rem;
+  top: 8px;
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2.5px solid var(--accent);
+}
+
+.tl__card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.4rem 1.4rem 1.2rem;
+  transition: border-color 0.2s ease;
+}
+.tl__card:hover { border-color: var(--accent); }
+
+.tl__period { font-size: 0.78rem; color: var(--accent); margin-bottom: 0.4rem; }
+.tl__role { font-size: 1.08rem; color: var(--heading); }
+.tl__company { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 0.9rem; }
+
+.tl__list {
+  padding-left: 1.1rem;
+  color: var(--text-dim);
+  font-size: 0.93rem;
+  display: grid;
+  gap: 0.45rem;
+}
+.tl__list li::marker { color: var(--accent); }
+
+/* Tags pequenas no rodapé de cada card (timeline e projetos) */
+.tl__tags, .proj__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1rem;
+}
+.tl__tags span, .proj__tags span {
+  font-size: 0.7rem;
+  padding: 0.22rem 0.6rem;
+  border-radius: 99px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ---------- 9. PROJETOS ---------- */
+.proj__grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.proj {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+.proj:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+.proj__head {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1rem;
+}
+.proj__icon { font-size: 1.8rem; line-height: 1.2; }
+.proj__title { font-size: 1.1rem; color: var(--heading); line-height: 1.35; }
+.proj__type { font-size: 0.74rem; color: var(--accent); margin-top: 0.25rem; }
+
+.proj__desc {
+  font-size: 0.94rem;
+  color: var(--text-dim);
+  flex: 1;
+}
+
+.proj__link {
+  margin-top: 1.1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* ---------- 10. HABILIDADES ---------- */
+.skills__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.skills__subtitle {
+  font-size: 0.85rem;
+  color: var(--accent);
+  margin-bottom: 1.4rem;
+}
+
+/* Barras de progresso */
+.skill { margin-bottom: 1.3rem; }
+.skill__head {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.92rem;
+  color: var(--heading);
+  margin-bottom: 0.45rem;
+}
+.skill__pct { color: var(--text-dim); font-size: 0.8rem; }
+
+.skill__track {
+  height: 8px;
+  border-radius: 99px;
+  background: var(--border);
+  overflow: hidden;
+}
+.skill__fill {
+  height: 100%;
+  width: 0; /* o JS anima até o valor de data-level */
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), #6ee7c7);
+  transition: width 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Nuvem de tags */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+.tag {
+  font-size: 0.84rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 99px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.tag:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Formação */
+.edu { list-style: none; display: grid; gap: 1rem; }
+.edu strong { font-size: 0.95rem; }
+.edu__meta { font-size: 0.83rem; color: var(--text-dim); }
+
+/* ---------- 11. CONTATO ---------- */
+.contato__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.contato__lead {
+  color: var(--text-dim);
+  margin-bottom: 1.8rem;
+  max-width: 30rem;
+}
+
+.contato__links { list-style: none; display: grid; gap: 0.9rem; }
+.contato__links a {
+  display: flex;
+  flex-direction: column;
+  color: var(--text);
+  font-size: 0.97rem;
+}
+.contato__links a:hover { color: var(--accent); text-decoration: none; }
+.contato__label {
+  font-size: 0.7rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+/* Formulário */
+.contato__form {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.5rem;
+}
+
+.form__group { margin-bottom: 1.1rem; }
+.form__group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--heading);
+  margin-bottom: 0.4rem;
+}
+.form__group input,
+.form__group textarea {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 0.93rem;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+.form__group input:focus,
+.form__group textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.form__hint {
+  margin-top: 0.8rem;
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+/* ---------- 12. RODAPÉ ---------- */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 1.6rem 0;
+}
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-dim);
+}
+.footer__top { font-size: 0.78rem; }
+
+/* ============================================================
+   BREAKPOINTS (Mobile First: só ampliações a partir daqui)
+   ============================================================ */
+
+/* ---------- Tablet (≥ 700px) ---------- */
+@media (min-width: 700px) {
+  :root { --section-y: 6rem; }
+
+  /* Menu deixa de ser dropdown e vira linha horizontal */
+  .nav__toggle { display: none; }
+  .nav__links {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    gap: 1.8rem;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .nav__links a { padding: 0; font-size: 0.92rem; }
+
+  .sobre__facts { grid-template-columns: repeat(3, 1fr); }
+
+  .proj__grid { grid-template-columns: 1fr 1fr; }
+
+  .contato__grid {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .contato__info, .contato__form { flex: 1; }
+}
+
+/* ---------- Desktop (≥ 1000px) ---------- */
+@media (min-width: 1000px) {
+  .hero__inner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+  }
+  .hero__terminal { flex-shrink: 0; width: 430px; }
+
+  .sobre__grid {
+    flex-direction: row;
+    gap: 3.5rem;
+  }
+  .sobre__text { flex: 1.4; }
+  .sobre__facts {
+    flex: 1;
+    grid-template-columns: 1fr;
+    align-content: start;
+  }
+
+  .timeline { padding-left: 2rem; }
+  .tl__marker { left: -2rem; }
+  .timeline::before { left: 5px; }
+
+  .skills__grid { flex-direction: row; }
+  .skills__bars, .skills__cloud { flex: 1; }
+
+  .footer__inner { flex-direction: row; justify-content: space-between; }
+}

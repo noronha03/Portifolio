@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Portfólio de Renan Noronha Rodrigues. Desenvolvimento de software, automação de processos e plataformas low-code (Zoho Creator, Deluge, ZML).">
+  <title>Renan Noronha Rodrigues · Desenvolvimento, Automação e Low-code</title>
+
+  <!-- Tipografia: Inter para texto, JetBrains Mono para detalhes "tech" -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ============================================================
+       NAVEGAÇÃO FIXA
+       Fica no topo e ganha fundo sólido ao rolar (ver js/main.js).
+       Em telas pequenas vira menu hambúrguer.
+       ============================================================ -->
+  <header class="nav" id="nav">
+    <div class="container nav__inner">
+      <a href="#hero" class="nav__logo">
+        <span class="nav__logo-mark">&lt;/&gt;</span> renan.dev
+      </a>
+
+      <!-- Botão hambúrguer: só aparece no mobile -->
+      <button class="nav__toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__links" id="navLinks">
+        <a href="#sobre">Sobre</a>
+        <a href="#experiencia">Experiência</a>
+        <a href="#projetos">Projetos</a>
+        <a href="#habilidades">Habilidades</a>
+        <a href="#contato" class="nav__cta">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============================================================
+         1. HERO
+         Nome + frase de efeito que une técnica e visão de negócio.
+         ============================================================ -->
+    <section class="hero" id="hero">
+      <div class="container hero__inner">
+        <div class="hero__text reveal">
+          <p class="hero__kicker mono">// Joinville, SC · Brasil</p>
+          <h1 class="hero__title">
+            Renan Noronha<br>Rodrigues
+          </h1>
+          <p class="hero__tagline">
+            Eu construo software que resolve problema de negócio:
+            <strong>automação de processos</strong>, <strong>sistemas low-code</strong>
+            e produtos SaaS pensados de ponta a ponta, do banco de dados à tela
+            que o cliente usa todo dia.
+          </p>
+          <div class="hero__actions">
+            <a href="#projetos" class="btn btn--primary">Ver projetos</a>
+            <a href="#contato" class="btn btn--ghost">Fale comigo</a>
+          </div>
+        </div>
+
+        <!-- Cartão estilo "terminal", reforça a identidade tech -->
+        <div class="hero__terminal reveal" aria-hidden="true">
+          <div class="terminal__bar">
+            <span class="dot dot--r"></span>
+            <span class="dot dot--y"></span>
+            <span class="dot dot--g"></span>
+            <span class="terminal__title mono">renan@dev: ~/perfil</span>
+          </div>
+          <pre class="terminal__body mono"><code>$ whoami
+desenvolvedor de software e automação
+
+$ cat stack.txt
+Zoho Creator · Deluge · ZML
+Docker · SQL · Apps Script
+
+$ ./objetivo.sh
+&gt; unir tecnologia e visão
+&gt; de negócio no mesmo produto<span class="cursor">▊</span></code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         2. SOBRE MIM
+         ============================================================ -->
+    <section class="section" id="sobre">
+      <div class="container">
+        <h2 class="section__title reveal"><span class="mono section__num">01.</span> Sobre mim</h2>
+        <div class="sobre__grid">
+          <div class="sobre__text reveal">
+            <p>
+              Trabalho na fronteira entre tecnologia e negócio. Tenho facilidade em
+              olhar para um processo, entender a lógica por trás dele e transformar
+              isso em sistema: regras de negócio bem estruturadas, automações que
+              tiram trabalho manual da frente e indicadores que ajudam quem decide.
+            </p>
+            <p>
+              Hoje atuo na área de TI e automação da New Shoes Franchising, um SaaS
+              B2B para redes de franquias, onde desenvolvo em low-code com o
+              ecossistema Zoho (Creator, Deluge e ZML). Antes disso, passei pela
+              Unidade de Planejamento da Prefeitura de Joinville, tratando grandes
+              volumes de dados e automatizando rotinas com Google Apps Script.
+            </p>
+            <p>
+              Em paralelo, sou cofundador do GetGo, um sistema de gestão e PDV para
+              restaurantes, onde cuido da lógica por trás do produto: as regras de
+              negócio, como cada fluxo deve funcionar, o planejamento de menus e a
+              usabilidade. Também implanto as funcionalidades, dou suporte direto
+              aos usuários e levanto requisitos junto aos clientes para ajustar o
+              produto a partir do retorno deles. Curso Engenharia de Software e sou
+              formado em Análise e Desenvolvimento de Sistemas.
+            </p>
+          </div>
+
+          <!-- Destaques rápidos ao lado do texto -->
+          <aside class="sobre__facts reveal">
+            <div class="fact">
+              <span class="fact__num mono">50+</span>
+              <span class="fact__label">franqueados atendidos como ponto único de contato</span>
+            </div>
+            <div class="fact">
+              <span class="fact__num mono">20+</span>
+              <span class="fact__label">clientes inadimplentes recuperados via negociação</span>
+            </div>
+            <div class="fact">
+              <span class="fact__num mono">2</span>
+              <span class="fact__label">produtos SaaS em que atuo no desenvolvimento</span>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. EXPERIÊNCIA PROFISSIONAL
+         Linha do tempo vertical. Cada item é um <article class="tl__item">.
+         Para adicionar uma experiência nova, copie um bloco inteiro.
+         ============================================================ -->
+    <section class="section section--alt" id="experiencia">
+      <div class="container">
+        <h2 class="section__title reveal"><span class="mono section__num">02.</span> Experiência profissional</h2>
+
+        <div class="timeline">
+
+          <article class="tl__item reveal">
+            <div class="tl__marker" aria-hidden="true"></div>
+            <div class="tl__card">
+              <p class="tl__period mono">Out/2025 → atual</p>
+              <h3 class="tl__role">Analista de TI e Automação · Supervisor de Equipe</h3>
+              <p class="tl__company">New Shoes Franchising · Joinville/SC</p>
+              <ul class="tl__list">
+                <li>Desenvolvimento e gerenciamento do CRM interno (CMV) em Zoho Creator, usado no controle de franquias e faturamento da rede.</li>
+                <li>Automação de alertas de pendências e rotinas financeiras em Deluge, reduzindo acompanhamento manual.</li>
+                <li>Criação de indicadores e dashboards que dão aos franqueados visibilidade sobre o próprio negócio.</li>
+                <li>Ponto único de contato de mais de 50 franqueados: triagem, priorização e resolução de chamados dentro do SLA.</li>
+                <li>Liderança de equipe: distribuição de demandas, reuniões de alinhamento e reporte de resultados à diretoria.</li>
+              </ul>
+              <div class="tl__tags mono">
+                <span>Zoho Creator</span><span>Deluge</span><span>ZML</span><span>SaaS B2B</span><span>Liderança</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tl__item reveal">
+            <div class="tl__marker" aria-hidden="true"></div>
+            <div class="tl__card">
+              <p class="tl__period mono">Jan/2026 → atual</p>
+              <h3 class="tl__role">Cofundador</h3>
+              <p class="tl__company">GetGo · Sistema de gestão para restaurantes</p>
+              <ul class="tl__list">
+                <li>Defino a lógica de negócio do produto: regras de funcionamento, planejamento de menus e usabilidade.</li>
+                <li>Implanto funcionalidades e dou suporte direto aos usuários do sistema.</li>
+                <li>Levanto requisitos junto aos clientes e ajusto o produto a partir do retorno deles.</li>
+              </ul>
+              <div class="tl__tags mono">
+                <span>SaaS</span><span>PDV</span><span>Stripe</span><span>Regra de negócio</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="tl__item reveal">
+            <div class="tl__marker" aria-hidden="true"></div>
+            <div class="tl__card">
+              <p class="tl__period mono">Jul/2025 → Out/2025</p>
+              <h3 class="tl__role">Estagiário em Desenvolvimento</h3>
+              <p class="tl__company">Prefeitura de Joinville · Unidade de Planejamento</p>
+              <ul class="tl__list">
+                <li>Tratamento, organização e padronização de grandes volumes de dados públicos.</li>
+                <li>Automação de rotinas e relatórios com Google Apps Script no Google Workspace.</li>
+              </ul>
+              <div class="tl__tags mono">
+                <span>Apps Script</span><span>Google Sheets</span><span>Análise de Dados</span>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. PROJETOS EM DESTAQUE
+         Cards grandes. Para novo projeto, duplique um <article class="proj">.
+         ============================================================ -->
+    <section class="section" id="projetos">
+      <div class="container">
+        <h2 class="section__title reveal"><span class="mono section__num">03.</span> Projetos em destaque</h2>
+
+        <div class="proj__grid">
+
+          <!-- Projeto 1: GetGo (PDV SaaS) -->
+          <article class="proj reveal">
+            <div class="proj__head">
+              <span class="proj__icon" aria-hidden="true">🍽️</span>
+              <div>
+                <h3 class="proj__title">GetGo · PDV SaaS para o setor alimentício</h3>
+                <p class="proj__type mono">Produto próprio · em produção</p>
+              </div>
+            </div>
+            <p class="proj__desc">
+              Sistema de gestão completo para restaurantes e pequenos negócios do
+              ramo alimentício: cardápio digital, frente de caixa (PDV), controle
+              de caixa, pedidos de delivery e balcão, pagamentos e relatórios, com
+              <strong>integração de pagamentos via Stripe</strong>. Cuido da lógica
+              de negócio por trás do produto: como cada fluxo deve funcionar, o
+              planejamento de menus e a usabilidade. Também implanto as
+              funcionalidades, dou suporte direto aos usuários e levanto requisitos
+              junto aos clientes para evoluir o produto a partir do retorno de quem
+              usa no dia a dia.
+            </p>
+            <div class="proj__tags mono">
+              <span>SaaS</span><span>PDV</span><span>Stripe</span><span>Regra de negócio</span><span>Delivery</span>
+            </div>
+            <a class="proj__link" href="https://sistema-restaurante-gray.vercel.app/" target="_blank" rel="noopener">
+              Ver landing page do produto →
+            </a>
+          </article>
+
+          <!-- Projeto 2: CRM CMV (New Shoes) -->
+          <article class="proj reveal">
+            <div class="proj__head">
+              <span class="proj__icon" aria-hidden="true">📊</span>
+              <div>
+                <h3 class="proj__title">CMV · CRM de gestão de franquias</h3>
+                <p class="proj__type mono">New Shoes Franchising · uso interno</p>
+              </div>
+            </div>
+            <p class="proj__desc">
+              Sistema CRM desenvolvido e gerenciado em Zoho Creator para o
+              controle da rede de franquias: cadastro e acompanhamento de
+              franqueados, <strong>controle de faturamento</strong> e
+              <strong>automação de alertas de pendências</strong> financeiras e
+              operacionais. As automações em Deluge eliminam conferências manuais
+              e garantem que nenhuma pendência passe despercebida, enquanto os
+              indicadores dão à gestão uma visão clara da saúde da rede.
+            </p>
+            <div class="proj__tags mono">
+              <span>Zoho Creator</span><span>Deluge</span><span>ZML</span><span>Automação</span><span>Faturamento</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. HABILIDADES TÉCNICAS
+         Barras de progresso (animadas via JS quando entram na tela)
+         + nuvem de tags para ferramentas complementares.
+         Para ajustar um nível, mude o atributo data-level (0 a 100).
+         ============================================================ -->
+    <section class="section section--alt" id="habilidades">
+      <div class="container">
+        <h2 class="section__title reveal"><span class="mono section__num">04.</span> Habilidades técnicas</h2>
+
+        <div class="skills__grid">
+
+          <div class="skills__bars reveal">
+            <h3 class="skills__subtitle mono">// principais stacks</h3>
+
+            <!-- Cada .skill é uma barra. data-level define a largura final. -->
+            <div class="skill" data-level="92">
+              <div class="skill__head"><span>Zoho Creator · Deluge · ZML</span><span class="mono skill__pct">92%</span></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="85">
+              <div class="skill__head"><span>Automação de processos</span><span class="mono skill__pct">85%</span></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="75">
+              <div class="skill__head"><span>Google Apps Script</span><span class="mono skill__pct">75%</span></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="65">
+              <div class="skill__head"><span>SQL</span><span class="mono skill__pct">65%</span></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+
+            <div class="skill" data-level="60">
+              <div class="skill__head"><span>Docker</span><span class="mono skill__pct">60%</span></div>
+              <div class="skill__track"><div class="skill__fill"></div></div>
+            </div>
+          </div>
+
+          <div class="skills__cloud reveal">
+            <h3 class="skills__subtitle mono">// ferramentas e ambientes</h3>
+            <div class="tags">
+              <span class="tag">Ubuntu / Linux</span>
+              <span class="tag">Windows</span>
+              <span class="tag">Terminal / CLI</span>
+              <span class="tag">Git</span>
+              <span class="tag">Stripe API</span>
+              <span class="tag">Google Workspace</span>
+              <span class="tag">Excel / Sheets</span>
+              <span class="tag">HTML · CSS · JS</span>
+              <span class="tag">Desenvolvimento com IA</span>
+              <span class="tag">Análise de dados</span>
+              <span class="tag">Dashboards e indicadores</span>
+              <span class="tag">Gestão de SLA</span>
+            </div>
+
+            <h3 class="skills__subtitle mono" style="margin-top: 2rem;">// formação</h3>
+            <ul class="edu">
+              <li>
+                <strong>Engenharia de Software</strong> (cursando)<br>
+                <span class="edu__meta">Universidade Católica de Santa Catarina · conclusão 2029</span>
+              </li>
+              <li>
+                <strong>Tecnólogo em Análise e Desenvolvimento de Sistemas</strong><br>
+                <span class="edu__meta">UNIASSELVI · concluído em 2025</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         6. CONTATO
+         Formulário sem backend: o JS monta um mailto com os campos.
+         Se quiser um envio real depois, troque pelo Formspree ou similar.
+         ============================================================ -->
+    <section class="section" id="contato">
+      <div class="container">
+        <h2 class="section__title reveal"><span class="mono section__num">05.</span> Contato</h2>
+
+        <div class="contato__grid">
+
+          <div class="contato__info reveal">
+            <p class="contato__lead">
+              Aberto a oportunidades e projetos em desenvolvimento, automação e
+              low-code. Presencial em Joinville e região, híbrido ou remoto.
+            </p>
+            <ul class="contato__links">
+              <li>
+                <a href="mailto:renanoronha2003@gmail.com">
+                  <span class="mono contato__label">e-mail</span>
+                  renanoronha2003@gmail.com
+                </a>
+              </li>
+              <li>
+                <a href="https://www.linkedin.com/in/renan-noronha-rodrigues-443743294/" target="_blank" rel="noopener">
+                  <span class="mono contato__label">linkedin</span>
+                  /in/renan-noronha-rodrigues
+                </a>
+              </li>
+              <li>
+                <!-- Troque pelo seu usuário real do GitHub quando quiser exibir -->
+                <a href="https://github.com/" target="_blank" rel="noopener">
+                  <span class="mono contato__label">github</span>
+                  github.com/seu-usuario
+                </a>
+              </li>
+              <li>
+                <a href="tel:+5547996305604">
+                  <span class="mono contato__label">telefone</span>
+                  (47) 99630-5604
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <form class="contato__form reveal" id="contactForm">
+            <div class="form__group">
+              <label for="fNome">Nome</label>
+              <input type="text" id="fNome" name="nome" placeholder="Seu nome" required>
+            </div>
+            <div class="form__group">
+              <label for="fEmail">E-mail</label>
+              <input type="email" id="fEmail" name="email" placeholder="voce@empresa.com" required>
+            </div>
+            <div class="form__group">
+              <label for="fMsg">Mensagem</label>
+              <textarea id="fMsg" name="mensagem" rows="5" placeholder="Conte sobre o projeto ou a vaga..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn--primary btn--full">Enviar mensagem</button>
+            <p class="form__hint mono">* abre seu cliente de e-mail com a mensagem pronta</p>
+          </form>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="mono">© <span id="year"></span> Renan Noronha Rodrigues · feito com HTML, CSS e JS puros</p>
+      <a href="#hero" class="footer__top mono">voltar ao topo ↑</a>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
